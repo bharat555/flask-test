@@ -1,2 +1,2 @@
-pip3 --upgrade
+pip --upgrade
 hug
