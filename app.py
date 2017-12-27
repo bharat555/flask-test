@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
-
-"""A basic (single function) API written using hug"""
+"""A simple API to enable adding two numbers together"""
 import hug
 
 
-@hug.get('/happy_birthday')
-def happy_birthday(name, age:hug.types.number=1):
-    """Says happy birthday to a user"""
-    return "Happy {age} Birthday {name}!".format(**locals())
+@hug.cli()
+def add(number_1: hug.types.number, number_2: hug.types.number):
+    """Returns the result of adding number_1 to number_2"""
+    return number_1 + number_2
+
+
+if __name__ == '__main__':
+    add.interface.cli()
