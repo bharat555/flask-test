@@ -12,4 +12,4 @@ def happy_birthday(name: hug.types.text, age: hug.types.number, hug_timer=3):
 
 
 if __name__ == '__main__':
-happy_birthday.interface.cli()
+    happy_birthday.interface.cli()
