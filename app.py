@@ -1,15 +1,18 @@
-"""First hug API (local, command-line, and HTTP access)"""
-import hug
+from flask import Flask, redirect, url_for, request
+app = Flask(__name__)
 
+@app.route('/success/<name>')
+def success(name):
+   return 'welcome %s' % name
 
-@hug.cli()
-@hug.get(examples='name=Timothy&age=26')
-@hug.local()
-def happy_birthday(name: hug.types.text, age: hug.types.number, hug_timer=3):
-    """Says happy birthday to a user"""
-    return {'message': 'Happy {0} Birthday {1}!'.format(age, name),
-            'took': float(hug_timer)}
-
+@app.route('/login',methods = ['POST', 'GET'])
+def login():
+   if request.method == 'POST':
+      user = request.form['nm']
+      return redirect(url_for('success',name = user))
+   else:
+      user = request.args.get('nm')
+      return redirect(url_for('success',name = user))
 
 if __name__ == '__main__':
-    happy_birthday.interface.cli()
+   app.run(debug = True)
